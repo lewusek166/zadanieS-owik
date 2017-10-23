@@ -18,8 +18,6 @@ public:
 	string fraza;
 	int iterator[9];
 	int prawda;
-	bool potwierdzenie;
-	bool potwierdzenie1;
 	Porównywanie ();
 	~Porównywanie();
 	void Pobranie_fazy();
@@ -36,8 +34,7 @@ private:
 
 Porównywanie ::Porównywanie ()
 {
-	potwierdzenie = false;
-	potwierdzenie1 = false;
+	
 	
 	
 }
@@ -75,7 +72,7 @@ void Porównywanie::odczyt()
 	while (getline(plik1, pomoc1, ' ')) {
 		iterator[0]++;
 	}
-	cout << "ilosc slow = " << iterator[0] << endl;
+	
 	dok1 = new string[iterator[0]+1];
 	
 	plik1.close();
@@ -87,7 +84,7 @@ void Porównywanie::odczyt()
 	int i = 0;
 	while (getline(plik1, dok1[i], ' '))
 	{
-		cout << dok1[i] << endl;
+		
 		i++;
 	}
 
@@ -110,7 +107,7 @@ void Porównywanie::tablica_jednorodna()
 		prawda = 0;
 		for (int j = i-1; j >= 0; j--) {
 			
-			cout << dok1[i] << " :: " << dok1p[j] << endl;
+			
 			if (dok1[i] != dok1p[j]) {
 				
 				prawda -= 1;
@@ -122,7 +119,7 @@ void Porównywanie::tablica_jednorodna()
 			
 				
 		}if (prawda<=0) {
-			cout << "zapis  :: " << dok1[i] << endl;
+			
 			dok1p[liczydlo] = dok1[i];
 			liczydlo++;
 			
@@ -130,9 +127,7 @@ void Porównywanie::tablica_jednorodna()
 		}
 	
 
-	for (int i = 0; i < iterator[0];i++) {
-		cout << dok1p[i] << endl;
-	}
+
 }
 
 
