@@ -4,8 +4,10 @@
 #include <string>
 #include <cstdlib>
 #include <cstdio>
+#include <boost\tokenizer.hpp>
+#include <vector>
 using namespace std;
-
+using namespace boost;
 
 
 
@@ -15,13 +17,13 @@ public:
 
 	string * dok1;
 	string * dok1p;
-	string * tabf;
+	vector < string > dane;
 	string fraza;
 	int iterator[9];
 	int prawda;
 	Porównywanie ();
 	~Porównywanie();
-	void Pobranie_fazy(string * frazy);
+	void Pobranie_fazy(vector < string > dane);
 	void odczyt(string * dok, string * dokp, string nazwa_pliku);
 	void wszystkie_fun();
 
@@ -45,22 +47,22 @@ Porównywanie::~Porównywanie()
 //	delete[] dok1p;
 }
 
-void Porównywanie::Pobranie_fazy(string * frazy)
+void Porównywanie::Pobranie_fazy(vector < string > dane)
 {	
-	string pomoc;
-	cout << "Podaj wyrazy do porównania w dokumencie " << endl;
-while (getline(cin, pomoc, ' ')) {
-		iterator[1]++;
-
-	}
-
-	cout << "Wyrazy do porównania" << pomoc << endl;
 	
-	frazy = new string[iterator[1] + 1];
+	cout << "Podaj wyrazy do por\243wnania w dokumencie " << endl;
+	getline(cin, fraza);
+
+	cout << "Wyrazy do porównania" << fraza << endl;
+	
+	
 
 
-
-
+	char_separator<char> separator(" ");
+	tokenizer<char_separator<char>> slowa(fraza, separator);
+	for (const auto& t : slowa) {
+		dane.push_back(t);
+	}
 
 
 }
@@ -130,6 +132,7 @@ void Porównywanie::odczyt(string * dok, string * dokp, string nazwa_pliku)
 void Porównywanie::wszystkie_fun()
 {
 	odczyt(dok1, dok1p, "dokument1.txt");
+	Pobranie_fazy(dane);
 }
 
 
@@ -138,6 +141,7 @@ void Porównywanie::wszystkie_fun()
 int main()
 {
 	Porównywanie obiekt;
+	
 	obiekt.wszystkie_fun();
 	
 	
