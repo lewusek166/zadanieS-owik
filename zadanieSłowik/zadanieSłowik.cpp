@@ -16,9 +16,10 @@ class Porównywanie
 public:
 
 	
-	vector <int> tablica_bool;
+	
 	vector < string > dane;
 	string fraza;
+	int** tablica_znacznikow;
 	int iterator[9];
 	int prawda;
 	Porównywanie ();
@@ -26,7 +27,8 @@ public:
 	void Pobranie_fazy(vector < string > dane);
 	void odczyt(int iterator,string * dok, string * dokp, string nazwa_pliku);
 	void wszystkie_fun();
-	void tablice_znkow_logicznych(int iterator,vector <int> tablica_bool, string dok, string dokp, vector< string> dane);
+	void tablice_znkow_logicznych(string dok, string dokp, vector< string> dane);
+	void usuwanie_tablicString(string * dok, string * dokp);
 private:
 	string * dok1;
 	string * dok1p;
@@ -65,7 +67,7 @@ Porównywanie::~Porównywanie()
 
 void Porównywanie::Pobranie_fazy(vector < string > dane)
 {	
-	
+	iterator[8] = 1;
 	cout << "Podaj wyrazy do por\243wnania w dokumencie " << endl;
 	getline(cin, fraza);
 
@@ -74,10 +76,11 @@ void Porównywanie::Pobranie_fazy(vector < string > dane)
 	
 
 
-	char_separator<char> separator(" ",", ");
+	char_separator<char> separator(" ");
 	tokenizer<char_separator<char>> slowa(fraza, separator);
 	for (const auto& t : slowa) {
 		dane.push_back(t);
+		iterator[8]++;
 	}
 
 
@@ -123,8 +126,7 @@ void Porównywanie::odczyt(int iterator,string * dok, string * dokp, string nazwa
 	for (i; i <= iterator; i++) {
 		prawda = 0;
 		for (int j = i-1; j >= 0; j--) {
-			
-			
+					
 			if (dok[i] != dokp[j]) {
 				
 				prawda -= 1;
@@ -133,7 +135,6 @@ void Porównywanie::odczyt(int iterator,string * dok, string * dokp, string nazwa
 			{
 				prawda += iterator;
 			}
-			
 				
 		}if (prawda<=0) {
 			
@@ -149,21 +150,52 @@ void Porównywanie::wszystkie_fun()
 {
 	
 	odczyt(iterator[0], dok1, dok1p, "dokumenty/dokument1.txt");
-	odczyt(iterator[0], dok2, dok2p, "dokumenty/dokument2.txt");
-	odczyt(iterator[0], dok3, dok3p, "dokumenty/dokument3.txt");
-	odczyt(iterator[0], dok4, dok4p, "dokumenty/dokument4.txt");
-	odczyt(iterator[0], dok5, dok5p, "dokumenty/dokument5.txt");
-	odczyt(iterator[0], dok6, dok6p, "dokumenty/dokument6.txt");
-	odczyt(iterator[0], dok7, dok7p, "dokumenty/dokument7.txt");
-	odczyt(iterator[0], dok8, dok8p, "dokumenty/dokument8.txt");
+	odczyt(iterator[1], dok2, dok2p, "dokumenty/dokument2.txt");
+	odczyt(iterator[2], dok3, dok3p, "dokumenty/dokument3.txt");
+	odczyt(iterator[3], dok4, dok4p, "dokumenty/dokument4.txt");
+	odczyt(iterator[4], dok5, dok5p, "dokumenty/dokument5.txt");
+	odczyt(iterator[5], dok6, dok6p, "dokumenty/dokument6.txt");
+	odczyt(iterator[6], dok7, dok7p, "dokumenty/dokument7.txt");
+	odczyt(iterator[7], dok8, dok8p, "dokumenty/dokument8.txt");
 	Pobranie_fazy(dane);
 }
 
-void Porównywanie::tablice_znkow_logicznych(int iterator, vector <int> tablica_bool, string dok, string dokp, vector<string> dane)
+void Porównywanie::tablice_znkow_logicznych(string dok, string dokp, vector<string> dane)
 {
-	//tablica_bool[iterator[0]+1, 0];///tablica zer ustawiona
+	
+	tablica_znacznikow = new int*[iterator[8]];
+	for (int i = 0; i < 8; i++) {
+		tablica_znacznikow[i] = new int[8];
+	}
+	string pomoc;
+	int rozmiar = (int)dane.size();
+
+	///sprawdzenie frazy w dokach 
+
+	for (int i = 0; i <(int)dane.size(); i++) {
+
+		for (int j = 0; j < iterator[0]; j++) {
+			pomoc = dokp[j];
+			if (pomoc == dane[i]) {
+
+				tablica_znacznikow[i][0] = 1;
+			}
+
+		}
 
 
+
+	}
+
+
+
+
+}
+
+void Porównywanie::usuwanie_tablicString(string * dok, string * dokp)
+{
+	delete[] dok;
+	delete[] dokp;
 }
 
 
