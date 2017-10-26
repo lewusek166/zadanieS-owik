@@ -17,16 +17,17 @@ public:
 
 	string * dok1;
 	string * dok1p;
+	vector <int> tablica_bool;
 	vector < string > dane;
 	string fraza;
-	int iterator[9];
+	int iterator[3];
 	int prawda;
 	Porównywanie ();
 	~Porównywanie();
 	void Pobranie_fazy(vector < string > dane);
-	void odczyt(string * dok, string * dokp, string nazwa_pliku);
+	void odczyt(int iterator[],string * dok, string * dokp, string nazwa_pliku);
 	void wszystkie_fun();
-
+	void tablice_znkow_logicznych(int iterator[],vector <int> tablica_bool, string dok, string dokp, vector< string> dane);
 private:
 
 };
@@ -67,7 +68,7 @@ void Porównywanie::Pobranie_fazy(vector < string > dane)
 
 }
 
-void Porównywanie::odczyt(string * dok, string * dokp, string nazwa_pliku)
+void Porównywanie::odczyt(int iterator[],string * dok, string * dokp, string nazwa_pliku)
 {
 	iterator[0] = 0;
 	fstream plik1;
@@ -131,9 +132,17 @@ void Porównywanie::odczyt(string * dok, string * dokp, string nazwa_pliku)
 
 void Porównywanie::wszystkie_fun()
 {
-	odczyt(dok1, dok1p, "dokument1.txt");
+	odczyt(iterator ,dok1, dok1p, "dokument1.txt");
 	Pobranie_fazy(dane);
 }
+
+void Porównywanie::tablice_znkow_logicznych(int iterator[], vector <int> tablica_bool, string dok, string dokp, vector<string> dane)
+{
+	//tablica_bool[iterator[0]]
+
+}
+
+
 
 
 
