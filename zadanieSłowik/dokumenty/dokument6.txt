@@ -1,0 +1,1 @@
+Usuwa wszystkie istniej¹ce elementy z kontenera, a nastêpnie kopiuje wskazane elementy do kontenera. (metoda) Usuwa wszystkie istniej¹ce elementy z kontenera, a nastêpnie kopiuje wskazane elementy do kontenera. (metoda)

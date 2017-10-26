@@ -15,21 +15,36 @@ class Porównywanie
 {
 public:
 
-	string * dok1;
-	string * dok1p;
+	
 	vector <int> tablica_bool;
 	vector < string > dane;
 	string fraza;
-	int iterator[3];
+	int iterator[9];
 	int prawda;
 	Porównywanie ();
 	~Porównywanie();
 	void Pobranie_fazy(vector < string > dane);
-	void odczyt(int iterator[],string * dok, string * dokp, string nazwa_pliku);
+	void odczyt(int iterator,string * dok, string * dokp, string nazwa_pliku);
 	void wszystkie_fun();
-	void tablice_znkow_logicznych(int iterator[],vector <int> tablica_bool, string dok, string dokp, vector< string> dane);
+	void tablice_znkow_logicznych(int iterator,vector <int> tablica_bool, string dok, string dokp, vector< string> dane);
 private:
-
+	string * dok1;
+	string * dok1p;
+	string * dok2;
+	string * dok2p;
+	string * dok3;
+	string * dok3p;
+	string * dok4;
+	string * dok4p;
+	string * dok5;
+	string * dok5p;
+	string * dok6;
+	string * dok6p;
+	string * dok7;
+	string * dok7p;
+	string * dok8;
+	string * dok8p;
+	
 };
 
 
@@ -59,7 +74,7 @@ void Porównywanie::Pobranie_fazy(vector < string > dane)
 	
 
 
-	char_separator<char> separator(" ");
+	char_separator<char> separator(" ",", ");
 	tokenizer<char_separator<char>> slowa(fraza, separator);
 	for (const auto& t : slowa) {
 		dane.push_back(t);
@@ -68,44 +83,44 @@ void Porównywanie::Pobranie_fazy(vector < string > dane)
 
 }
 
-void Porównywanie::odczyt(int iterator[],string * dok, string * dokp, string nazwa_pliku)
+void Porównywanie::odczyt(int iterator,string * dok, string * dokp, string nazwa_pliku)
 {
-	iterator[0] = 0;
-	fstream plik1;
+	iterator = 0;
+	fstream plik;
 
-	plik1.open(nazwa_pliku, ios::in);
-	if (plik1.good() == false) {
+	plik.open(nazwa_pliku, ios::in);
+	if (plik.good() == false) {
 		cout << "B³¹d otwarcia pliku : "<< nazwa_pliku<< endl;
 		exit(0);
 	}
 	string pomoc1;
-	while (getline(plik1, pomoc1, ' ')) {
-		iterator[0]++;
+	while (getline(plik, pomoc1, ' ')) {
+		iterator++;
 	}
 	
-	dok = new string[iterator[0]+1];
+	dok = new string[iterator +1];
 	
-	plik1.close();
-	plik1.open(nazwa_pliku, ios::in);
-	if (plik1.good() == false) {
+	plik.close();
+	plik.open(nazwa_pliku, ios::in);
+	if (plik.good() == false) {
 		cout << "B³¹d otwarcia pliku : " << nazwa_pliku << endl;
 		exit(0);
 	}
 	int z = 0;
-	while (getline(plik1, dok[z], ' '))
+	while (getline(plik, dok[z], ' '))
 	{
 		
 		z++;
 	}
-	plik1.close();
+	plik.close();
 
 
 	/////tablica jednorodna
-	dokp = new string[iterator[0] + 1];
+	dokp = new string[iterator + 1];
 	int liczydlo = 1;
 	int i = 1;
 	dokp[0] = dok[0];
-	for (i; i <= iterator[0]; i++) {
+	for (i; i <= iterator; i++) {
 		prawda = 0;
 		for (int j = i-1; j >= 0; j--) {
 			
@@ -116,7 +131,7 @@ void Porównywanie::odczyt(int iterator[],string * dok, string * dokp, string naz
 			}
 			else
 			{
-				prawda += iterator[0];
+				prawda += iterator;
 			}
 			
 				
@@ -132,13 +147,22 @@ void Porównywanie::odczyt(int iterator[],string * dok, string * dokp, string naz
 
 void Porównywanie::wszystkie_fun()
 {
-	odczyt(iterator ,dok1, dok1p, "dokument1.txt");
+	
+	odczyt(iterator[0], dok1, dok1p, "dokumenty/dokument1.txt");
+	odczyt(iterator[0], dok2, dok2p, "dokumenty/dokument2.txt");
+	odczyt(iterator[0], dok3, dok3p, "dokumenty/dokument3.txt");
+	odczyt(iterator[0], dok4, dok4p, "dokumenty/dokument4.txt");
+	odczyt(iterator[0], dok5, dok5p, "dokumenty/dokument5.txt");
+	odczyt(iterator[0], dok6, dok6p, "dokumenty/dokument6.txt");
+	odczyt(iterator[0], dok7, dok7p, "dokumenty/dokument7.txt");
+	odczyt(iterator[0], dok8, dok8p, "dokumenty/dokument8.txt");
 	Pobranie_fazy(dane);
 }
 
-void Porównywanie::tablice_znkow_logicznych(int iterator[], vector <int> tablica_bool, string dok, string dokp, vector<string> dane)
+void Porównywanie::tablice_znkow_logicznych(int iterator, vector <int> tablica_bool, string dok, string dokp, vector<string> dane)
 {
-	//tablica_bool[iterator[0]]
+	//tablica_bool[iterator[0]+1, 0];///tablica zer ustawiona
+
 
 }
 
